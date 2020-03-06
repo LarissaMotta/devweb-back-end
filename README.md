@@ -38,6 +38,8 @@ Abaixo está a imagem demonstrando o [PMC](https://robsoncamargo.com.br/blog/pro
 #### 4.2 Estrutural - Diagrama de classes do Projeto
 
 ### Informações adicionais
-Todo o código fonte está hospedado no [GitHub](https://github.com/LarissaMotta/devweb-back-end).
+Todo o código fonte está hospedado no:
+- Front-end: [GitHub](https://github.com/LarissaMotta/devweb-front-end). 
+- Back-end: [GitHub](https://github.com/LarissaMotta/devweb-back-end).
 
 
