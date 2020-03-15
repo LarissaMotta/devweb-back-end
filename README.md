@@ -37,6 +37,10 @@ Abaixo está a imagem demonstrando o [PMC](https://robsoncamargo.com.br/blog/pro
 
 #### 4.2 Estrutural - Diagrama de classes do Projeto
 
+<figure>
+    <img src="https://github.com/LarissaMotta/devweb-back-end/blob/master/documentation/Diagrama%20de%20Classes.png?raw=true" alt="Diagrama de Classes" title="Beauty Control - Diagrama de Classes" />
+</figure>
+
 ### Informações adicionais
 Todo o código fonte está hospedado no:
 - [Front-end](https://github.com/LarissaMotta/devweb-front-end). 
