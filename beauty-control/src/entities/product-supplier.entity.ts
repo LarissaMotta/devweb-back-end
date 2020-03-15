@@ -1,6 +1,6 @@
 import { Entity, Column, ManyToOne } from 'typeorm';
 import { Product } from './product.entity';
-import { Supplier } from './supplier.entity copy';
+import { Supplier } from './supplier.entity';
 
 @Entity()
 export class ProductSupplier {

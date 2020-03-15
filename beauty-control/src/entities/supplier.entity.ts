@@ -11,10 +11,7 @@ export class Supplier extends BaseAudited {
     @Column()
     name: string;
 
-    @Column()
-    rating: number;
-
     @OneToMany(type => ProductSupplier, ps => ps.supplier)
     productSuppliers: ProductSupplier[];
-    
+
 }

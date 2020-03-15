@@ -1,9 +1,11 @@
+import { AuthStrategiesModule } from './auth-strategies/auth-strategies.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ControllersModule } from './controllers/controllers.module';
 import { Product } from './entities/product.entity';
 import { ProductSupplier } from './entities/product-supplier.entity';
-import { Supplier } from './entities/supplier.entity copy';
+import { Supplier } from './entities/supplier.entity';
+import { User } from './entities/user.entity';
 
 @Module({
   imports: [
@@ -18,7 +20,8 @@ import { Supplier } from './entities/supplier.entity copy';
       entities: [
         Product,
         ProductSupplier,
-        Supplier
+        Supplier,
+        User
       ],
       synchronize: true,
     }),
