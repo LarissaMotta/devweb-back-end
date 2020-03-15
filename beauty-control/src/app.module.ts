@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ControllersModule } from './controllers/controllers.module';
 import { Product } from './entities/product.entity';
+import { ProductSupplier } from './entities/product-supplier.entity';
+import { Supplier } from './entities/supplier.entity copy';
 
 @Module({
   imports: [
@@ -14,7 +16,9 @@ import { Product } from './entities/product.entity';
       password: 'devweb',
       database: 'beauty_control',
       entities: [
-        Product
+        Product,
+        ProductSupplier,
+        Supplier
       ],
       synchronize: true,
     }),
