@@ -21,14 +21,14 @@ export class GenericController<T> {
     @Post()
     @UseGuards(JwtAuthGuard)
     async create(@Body() entity: T): Promise<void> {
-        this.service.save(entity)
+        this.service.save(entity);
     }
 
     @Put(':id')
     @UseGuards(JwtAuthGuard)
     async update(@Param('id') id: number, @Body() entity: T): Promise<void> {
         if (id != (entity as any).id) throw new HttpException('id param !== entity.id', HttpStatus.BAD_REQUEST);
-        this.service.save(entity)
+        this.service.save(entity);
     }
 
     @Delete(':id')

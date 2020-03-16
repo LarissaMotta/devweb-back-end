@@ -19,4 +19,7 @@ export class Product extends BaseAudited {
 
     @OneToMany(type => ProductSupplier, ps => ps.product)
     productSuppliers: ProductSupplier[];
+
+    @Column( { nullable: true })
+    img: string;
 }

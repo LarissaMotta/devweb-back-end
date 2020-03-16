@@ -10,7 +10,7 @@ export class ProductService extends BaseAuditedService<Product> {
     constructor(
         @InjectRepository(Product)
         public pRepository: Repository<Product>,
-      ) {
+    ) {
         super(pRepository);
-      }
+    }
 }
