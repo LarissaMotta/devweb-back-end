@@ -7,6 +7,7 @@ import { User } from 'src/entities/user.entity';
 import { UserService } from './user.service';
 import { Supplier } from 'src/entities/supplier.entity';
 import { AuthService } from './auth.service';
+import { JwtService, JwtModule } from '@nestjs/jwt';
 
 @Module({
     imports: [
@@ -15,7 +16,10 @@ import { AuthService } from './auth.service';
             ProductSupplier,
             Supplier,
             User
-        ])
+        ]),
+        JwtModule.register({
+            secret: 'DevWeb'
+        }),
     ],
     providers: [
         ProductService,
@@ -25,7 +29,7 @@ import { AuthService } from './auth.service';
     exports: [
         ProductService,
         UserService,
-        AuthService
+        AuthService,
     ]
 })
 export class ServicesModule {}

@@ -12,11 +12,11 @@ import { User } from './entities/user.entity';
     ControllersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: 'tuffi.db.elephantsql.com',
       port: 5432,
-      username: 'postgres',
-      password: 'devweb',
-      database: 'beauty_control',
+      username: 'rcvzjvep',
+      password: 'asMGCyWGa93NEXDHfr6p6dmkmMUndEhN',
+      database: 'rcvzjvep',
       entities: [
         Product,
         ProductSupplier,
