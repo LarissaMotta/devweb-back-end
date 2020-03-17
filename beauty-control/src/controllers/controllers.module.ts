@@ -4,6 +4,8 @@ import { ServicesModule } from 'src/services/services.module';
 import { AuthStrategiesModule } from 'src/auth-strategies/auth-strategies.module';
 import { UserController } from './user.controller';
 import { AuthController } from './auth.controller';
+import { SupplierController } from './supplier.controller';
+import { ProductSupplierController } from './product-supplier.controller';
 
 @Module({
     imports: [
@@ -13,7 +15,9 @@ import { AuthController } from './auth.controller';
     controllers: [
         ProductController,
         UserController,
-        AuthController
+        AuthController,
+        SupplierController,
+        ProductSupplierController
     ],
 })
 export class ControllersModule {}

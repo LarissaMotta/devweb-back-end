@@ -7,18 +7,19 @@ export class GenericService<T> {
     ) { }
 
     async findAll(): Promise<T[]> {
-        return this.genericRepository.find();
+        return await this.genericRepository.find();
     }
 
     async findOne(id: number): Promise<T> {
-        return this.genericRepository.findOne(id);
+        return await this.genericRepository.findOne(id);
     }
 
     async save(entity: T): Promise<void> {
-        this.genericRepository.save(entity)
+        await this.genericRepository.save(entity)
     }
 
     async delete(id: number): Promise<void> {
-        this.genericRepository.delete(id);
+        await this.genericRepository.delete(id);
     }
+    
 }

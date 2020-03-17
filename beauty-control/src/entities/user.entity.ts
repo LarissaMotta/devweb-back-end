@@ -1,5 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { Role } from "src/enums/role.enum";
+import { ProductSupplier } from "./product-supplier.entity";
+import { UserSupplierRating } from "./user-supplier-rating.entity";
 
 @Entity()
 export class User {
@@ -18,4 +20,8 @@ export class User {
     
     @Column({type: 'enum', enum: Role })
     role: Role
+
+    @OneToMany(type => UserSupplierRating, usr => usr.user)
+    userSupplierRating: UserSupplierRating[];
+
 }

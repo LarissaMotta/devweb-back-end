@@ -9,31 +9,31 @@ export class GenericController<T> {
     @Get()
     @UseGuards(JwtAuthGuard)
     async findAll(): Promise<T[]> {
-        return this.service.findAll();
+        return await this.service.findAll();
     }
 
-    @UseGuards(JwtAuthGuard)
     @Get(':id')
+    @UseGuards(JwtAuthGuard)
     async findOne(@Param('id') id: number): Promise<T> {
-        return this.service.findOne(id);
+        return await this.service.findOne(id);
     }
 
     @Post()
     @UseGuards(JwtAuthGuard)
     async create(@Body() entity: T): Promise<void> {
-        this.service.save(entity);
+        await this.service.save(entity);
     }
 
     @Put(':id')
     @UseGuards(JwtAuthGuard)
     async update(@Param('id') id: number, @Body() entity: T): Promise<void> {
         if (id != (entity as any).id) throw new HttpException('id param !== entity.id', HttpStatus.BAD_REQUEST);
-        this.service.save(entity);
+        await this.service.save(entity);
     }
 
     @Delete(':id')
     @UseGuards(JwtAuthGuard)
     async delete(@Param('id') id: number): Promise<void> {
-        this.service.delete(id);
+        await this.service.delete(id);
     }
 }

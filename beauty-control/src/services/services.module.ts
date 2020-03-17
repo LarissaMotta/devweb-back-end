@@ -8,6 +8,9 @@ import { UserService } from './user.service';
 import { Supplier } from 'src/entities/supplier.entity';
 import { AuthService } from './auth.service';
 import { JwtService, JwtModule } from '@nestjs/jwt';
+import { UserSupplierRating } from 'src/entities/user-supplier-rating.entity';
+import { SupplierService } from './supplier.service';
+import { ProductSupplierService } from './product-supplier.service';
 
 @Module({
     imports: [
@@ -15,7 +18,8 @@ import { JwtService, JwtModule } from '@nestjs/jwt';
             Product,
             ProductSupplier,
             Supplier,
-            User
+            User,
+            UserSupplierRating
         ]),
         JwtModule.register({
             secret: 'DevWeb'
@@ -24,12 +28,16 @@ import { JwtService, JwtModule } from '@nestjs/jwt';
     providers: [
         ProductService,
         UserService,
-        AuthService
+        AuthService,
+        SupplierService,
+        ProductSupplierService
     ],
     exports: [
         ProductService,
         UserService,
         AuthService,
+        SupplierService,
+        ProductSupplierService
     ]
 })
 export class ServicesModule {}

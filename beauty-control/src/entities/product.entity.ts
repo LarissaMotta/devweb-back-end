@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, AfterLoad, RelationId } from 'typeorm';
 import { BaseAudited } from 'src/models/base-audited.model';
 import { Category } from 'src/enums/category.enum';
 import { ProductSupplier } from './product-supplier.entity';
@@ -18,8 +18,18 @@ export class Product extends BaseAudited {
     category: Category
 
     @OneToMany(type => ProductSupplier, ps => ps.product)
-    productSuppliers: ProductSupplier[];
+    productSuppliers: Promise<ProductSupplier[]>;
+
+    @RelationId('productSuppliers')
+    productSuppliersIds: number[];
 
     @Column( { nullable: true })
     img: string;
+
+    quantity: number
+
+    @AfterLoad()
+    async getQuantity(){
+        this.quantity =  (await this.productSuppliers).map(ps => ps.quantity).reduce((p, c) => p + c, 0);
+    }
 }

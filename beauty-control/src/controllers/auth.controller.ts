@@ -9,7 +9,7 @@ export class AuthController {
 
     @UseGuards(LocalStrategyGuard)
     @Post('login')
-    async login(@Request() req) {
+    login(@Request() req): { access_token: string } {
         return this.authService.login(req.user);
     }
 }
