@@ -24,4 +24,5 @@ export class UserService extends GenericService<User> {
     async findByEmail(email: string): Promise<User | null> {
         return await this.uRepository.findOne({ email })
     }
+    
 }

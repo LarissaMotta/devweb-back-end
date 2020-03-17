@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany, AfterLoad, RelationI
 import { BaseAudited } from 'src/models/base-audited.model';
 import { Category } from 'src/enums/category.enum';
 import { ProductSupplier } from './product-supplier.entity';
+import { IsEnum } from 'class-validator';
 
 @Entity()
 export class Product extends BaseAudited {
@@ -15,6 +16,7 @@ export class Product extends BaseAudited {
     description: string;
 
     @Column({type: 'enum', enum: Category })
+    @IsEnum(Category)
     category: Category
 
     @OneToMany(type => ProductSupplier, ps => ps.product)
