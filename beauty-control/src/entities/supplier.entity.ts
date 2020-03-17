@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany, AfterLoad } from 'ty
 import { BaseAudited } from 'src/models/base-audited.model';
 import { ProductSupplier } from './product-supplier.entity';
 import { UserSupplierRating } from './user-supplier-rating.entity';
+import { Length } from 'class-validator';
 
 @Entity()
 export class Supplier extends BaseAudited {
@@ -9,7 +10,8 @@ export class Supplier extends BaseAudited {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column('varchar', { length: 70 })
+    @Length(4, 70)
     name: string;
 
     @OneToMany(type => ProductSupplier, ps => ps.supplier)

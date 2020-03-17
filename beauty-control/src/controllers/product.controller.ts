@@ -1,4 +1,4 @@
-import { Controller, Post, UseInterceptors, UseGuards, Body, Get, Param, Res, UploadedFile, Put, Delete, Req } from '@nestjs/common';
+import { Controller, Post, UseInterceptors, UseGuards, Body, Get, Param, Res, UploadedFile, Put, Delete, Req, HttpException, HttpStatus } from '@nestjs/common';
 import { Product } from 'src/entities/product.entity';
 import { ProductService } from 'src/services/product.service';
 import { JwtAuthGuard } from 'src/auth-strategies/jwt-strategy.guard';
@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
 
 const imageFileFilter = (req, file, callback) => {
   if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-    return callback(new Error('Only image files are allowed!'), false);
+    return callback(new HttpException('Only image files are allowed!', HttpStatus.BAD_REQUEST), false);
   }
   callback(null, true);
 };

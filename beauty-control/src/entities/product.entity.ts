@@ -2,17 +2,19 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany, AfterLoad, RelationI
 import { BaseAudited } from 'src/models/base-audited.model';
 import { Category } from 'src/enums/category.enum';
 import { ProductSupplier } from './product-supplier.entity';
-import { IsEnum } from 'class-validator';
+import { IsEnum, Length } from 'class-validator';
 
 @Entity()
 export class Product extends BaseAudited {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column('varchar', { length: 70 })
+    @Length(4, 70)
     name: string;
 
-    @Column()
+    @Column('text')
+    @Length(0)
     description: string;
 
     @Column({type: 'enum', enum: Category })
@@ -25,7 +27,7 @@ export class Product extends BaseAudited {
     @RelationId('productSuppliers')
     productSuppliersIds: number[];
 
-    @Column( { nullable: true })
+    @Column('varchar', { nullable: true, length: 70 })
     img: string;
 
     quantity: number
