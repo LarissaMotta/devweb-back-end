@@ -2,8 +2,9 @@
 
 O trabalho em questão é da disciplina de *Desenvolvimento Web*, do curso de graduação de Bacharelado de Sistema de Informação do IFES - Serra, pelo docente Mr. Felipe Frechiani de Oliveira.
 
-### Informações gerais
-- **Autores**: [Joel Will](https://github.com/joelwb) e [Nicolas Sampaio](https://github.com/NicolasSampaio)
+### Informações Gerais
+- **Equipe**: [Harã Heique](https://github.com/HaraHeique), [Joel Will](https://github.com/joelwb), [Larissa Motta](https://github.com/LarissaMotta) e [Nicolas Sampaio](https://github.com/NicolasSampaio)
+- **Principais Responsáveis**: [Joel Will](https://github.com/joelwb) e [Nicolas Sampaio](https://github.com/NicolasSampaio)
 - **Tecnologia**: NestJS (Versão 5.0.0+)
 - **Ambiente de desenvolvimento**: Visual Studio Code (versão 1.35.1+)
 
