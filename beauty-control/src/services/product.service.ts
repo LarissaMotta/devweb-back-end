@@ -13,4 +13,12 @@ export class ProductService extends BaseAuditedService<Product> {
         super(pRepository);
     }
 
+    async findAllPaginated(page: number, name: string): Promise<[Product[], number]> {
+        return await this.pRepository.findAndCount({ 
+            where: `"name" ILIKE '${name}%'`,
+            skip: page,
+            take: 24 
+        })
+    }
+
 }

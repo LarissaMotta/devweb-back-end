@@ -13,11 +13,11 @@ import { UserSupplierRating } from './entities/user-supplier-rating.entity';
     ControllersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'tuffi.db.elephantsql.com',
+      host: 'localhost',
       port: 5432,
-      username: 'rcvzjvep',
-      password: 'asMGCyWGa93NEXDHfr6p6dmkmMUndEhN',
-      database: 'rcvzjvep',
+      username: 'postgres',
+      password: 'devweb',
+      database: 'beauty_control',
       entities: [
         Product,
         ProductSupplier,

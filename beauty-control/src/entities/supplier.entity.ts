@@ -14,6 +14,14 @@ export class Supplier extends BaseAudited {
     @Length(4, 70)
     name: string;
 
+    @Column('varchar', { length: 11 })
+    @Length(10, 11)
+    telephone: string;
+
+    @Column('text')
+    @Length(0)
+    observation: string;
+
     @OneToMany(type => ProductSupplier, ps => ps.supplier)
     productSuppliers: ProductSupplier[];
 
