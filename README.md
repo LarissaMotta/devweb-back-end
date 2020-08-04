@@ -27,7 +27,7 @@ Além disso o administrador também terá a possibilidade de avaliar o serviço 
 Abaixo está a imagem demonstrando o [PMC](https://robsoncamargo.com.br/blog/projec-model-canvas-para-gerenciamento-de-projetos), uma metodologia robusta, porém simples, de planejamento de projetos muito utilizada atualmente.
 
 <figure>
-    <img src="https://github.com/LarissaMotta/devweb-front-end/blob/master/documentation/images/Project_Model_Canvas-PMC.jpg" alt="PMC-project" title="Project Model Canvas do projeto Beauty Control" />
+    <img src="https://github.com/LarissaMotta/devweb-front-end/blob/master/docs/images/Project_Model_Canvas-PMC.jpg" alt="PMC-project" title="Project Model Canvas do projeto Beauty Control" />
 </figure>
 
 ### 3. Requisitos do Sistema
