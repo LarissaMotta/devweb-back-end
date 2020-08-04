@@ -37,13 +37,13 @@ Abaixo está a imagem demonstrando o [PMC](https://robsoncamargo.com.br/blog/pro
 #### 4.1 Comportamental - Casos de Uso
 
 <figure>
-    <img src="https://github.com/LarissaMotta/devweb-back-end/blob/master/documentation/Diagrama%20de%20Casos%20de%20Uso.png?raw=true" alt="Casos de Uso" title="Beauty Control - Casos de Uso" />
+    <img src="https://github.com/LarissaMotta/devweb-back-end/blob/master/docs/Diagrama%20de%20Casos%20de%20Uso.png?raw=true" alt="Casos de Uso" title="Beauty Control - Casos de Uso" />
 </figure>
 
 #### 4.2 Estrutural - Diagrama de classes do Projeto
 
 <figure>
-    <img src="https://github.com/LarissaMotta/devweb-back-end/blob/master/documentation/Class%20Diagram2.jpg?raw=true" alt="Diagrama de Classes" title="Beauty Control - Diagrama de Classes" />
+    <img src="https://github.com/LarissaMotta/devweb-back-end/blob/master/docs/Diagrama%20de%20Classes.png?raw=true" alt="Diagrama de Classes" title="Beauty Control - Diagrama de Classes" />
 </figure>
 
 ### Informações adicionais
