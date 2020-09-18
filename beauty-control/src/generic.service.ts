@@ -14,8 +14,8 @@ export class GenericService<T> {
         return await this.genericRepository.findOne(id);
     }
 
-    async save(entity: T): Promise<void> {
-        await this.genericRepository.save(entity)
+    async save(entity: T): Promise<T> {
+        return await this.genericRepository.save(entity)
     }
 
     async delete(id: number): Promise<void> {

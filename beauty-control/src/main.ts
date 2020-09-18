@@ -11,9 +11,11 @@ async function bootstrap() {
     .setDescription('API description')
     .setVersion('1.0')
     .addTag('devweb')
+    .addBearerAuth()
     .build();
     
     const document = SwaggerModule.createDocument(app, options);
+
     SwaggerModule.setup('api', app, document);
 
     app.useGlobalPipes(new ValidationPipe({ 

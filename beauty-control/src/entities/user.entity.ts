@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
-import { Role } from "src/enums/role.enum";
+import { UserRole } from "src/enums/user-role.enum";
 import { UserSupplierRating } from "./user-supplier-rating.entity";
-import { Length, IsEmail, IsEnum } from "class-validator";
+import { Length, IsEmail, IsEnum, IsOptional } from "class-validator";
 
 @Entity()
 export class User {
@@ -18,13 +18,14 @@ export class User {
     @Length(4, 70)
     email: string;
 
-    @Column('varchar', { length: 40 })
+    @Column('varchar', { length: 100 })
     @Length(6, 40)
     password: string;
     
-    @Column({type: 'enum', enum: Role })
-    @IsEnum(Role)
-    role: Role
+    @Column({type: 'enum', enum: UserRole })
+    @IsOptional()
+    @IsEnum(UserRole)
+    role: UserRole
 
     @OneToMany(type => UserSupplierRating, usr => usr.user)
     userSupplierRating: UserSupplierRating[];

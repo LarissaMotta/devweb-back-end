@@ -5,6 +5,10 @@ import { JwtAuthGuard } from 'src/auth-strategies/jwt-strategy.guard';
 import { FileInterceptor } from '@nestjs/platform-express'
 import { extname } from  'path';
 import { BaseAuditedController } from 'src/base-audited.controller';
+import { UserRole } from 'src/enums/user-role.enum';
+import { Roles } from 'src/role/role.decorator';
+import { RolesGuard } from 'src/role/role.guard';
+import { ApiBearerAuth, ApiBody, ApiConsumes } from '@nestjs/swagger';
 
 const fs = require('fs')
 
@@ -28,6 +32,7 @@ const imageFileFilter = (req, file, callback) => {
   callback(null, true);
 };
 
+@ApiBearerAuth()
 @Controller('products')
 export class ProductController extends BaseAuditedController<Product> {
 
@@ -45,7 +50,8 @@ export class ProductController extends BaseAuditedController<Product> {
     }
 
     @Delete(":id/img")
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
     async deleteImg(@Param('id') id: number, @Res() res) {
         const product = await this.pService.findOne(id);
         fs.unlinkSync("./productImgs/" + product.img);
@@ -61,20 +67,26 @@ export class ProductController extends BaseAuditedController<Product> {
     }
 
     @Post()
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
     @UseInterceptors(FileInterceptor('img', { storage, fileFilter: imageFileFilter }))
-    async createWithImg(@UploadedFile() img,@Body() product: Product, @Req() req): Promise<void> {
-        await super.createBaseAudited({...product, img: img ? img.filename : null } as Product, req);
+    async createWithImg(@UploadedFile() img,@Body() product: Product, @Req() req): Promise<Product> {
+        return await super.createBaseAudited({...product, img: img ? img.filename : null } as Product, req);
     }
 
     @Put(':id')
-    @UseGuards(JwtAuthGuard)
+    
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
     @UseInterceptors(FileInterceptor('img', { storage, fileFilter: imageFileFilter }))
-    async updateWithImg(@UploadedFile() img, @Param('id') id: number, @Body() product: Product, @Req() req): Promise<void> {
+    @ApiConsumes('multipart/form-data')
+    @ApiBody({ type: Product })
+    async updateWithImg(@UploadedFile() img, @Param('id') id: number, @Body() product: Product, @Req() req): Promise<Product> {
         product.id = +product.id;
         product = {...product} as Product
 
         if (img) { product.img = img.filename }
-        await super.updateBaseAudited(id, product, req);
+        return await super.updateBaseAudited(id, product, req);
     }
+    
 }

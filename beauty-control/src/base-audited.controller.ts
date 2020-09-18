@@ -12,15 +12,15 @@ export class BaseAuditedController<T extends BaseAudited> extends GenericControl
 
     @Post()
     @UseGuards(JwtAuthGuard)
-    async createBaseAudited(@Body() entity: T, @Req() req): Promise<void> {
-        await this.baseService.create(entity, req.user);
+    async createBaseAudited(@Body() entity: T, @Req() req): Promise<T> {
+        return await this.baseService.create(entity, req.user);
     }
 
     @Put(':id')
     @UseGuards(JwtAuthGuard)
-    async updateBaseAudited(@Param('id') id: number, @Body() entity: T, @Req() req): Promise<void> {
+    async updateBaseAudited(@Param('id') id: number, @Body() entity: T, @Req() req): Promise<T> {
         if (id != (entity as any).id) throw new HttpException('id param !== entity.id', HttpStatus.BAD_REQUEST);
-        await this.baseService.update(entity, req.user);
+        return await this.baseService.update(entity, req.user);
     }
 
     @Delete(':id')

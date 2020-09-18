@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
 
 export abstract class BaseAudited {
     
@@ -20,7 +20,12 @@ export abstract class BaseAudited {
     @Column({ nullable: true })
     deletedBy: string;
 
-    @Column({ nullable: true })
+    @Column('int', { default: 0 })
     version: number
+
+    @BeforeUpdate()
+    incrementVersion() {
+        this.version++;
+    }
     
 }

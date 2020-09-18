@@ -1,24 +1,31 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, AfterLoad, RelationId } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, AfterLoad, RelationId} from 'typeorm';
 import { BaseAudited } from 'src/models/base-audited.model';
 import { Category } from 'src/enums/category.enum';
 import { ProductSupplier } from './product-supplier.entity';
-import { IsEnum, Length } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, Length } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Product extends BaseAudited {
     @PrimaryGeneratedColumn()
+    @ApiProperty()
+    @IsNumber()
+    @IsOptional()
     id: number;
 
     @Column('varchar', { length: 70 })
+    @ApiProperty()
     @Length(4, 70)
     name: string;
 
     @Column('text')
     @Length(0)
+    @ApiProperty()
     description: string;
 
     @Column({type: 'enum', enum: Category })
     @IsEnum(Category)
+    @ApiProperty({ enum: Category })
     category: Category
 
     @OneToMany(type => ProductSupplier, ps => ps.product)
@@ -36,4 +43,5 @@ export class Product extends BaseAudited {
     async getQuantity(){
         this.quantity =  (await this.productSuppliers).map(ps => ps.quantity).reduce((p, c) => p + c, 0);
     }
+    
 }

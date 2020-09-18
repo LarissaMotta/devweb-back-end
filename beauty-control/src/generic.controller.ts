@@ -20,8 +20,8 @@ export class GenericController<T> {
 
     @Post()
     @UseGuards(JwtAuthGuard)
-    async create(@Body() entity: T): Promise<void> {
-        await this.service.save(entity);
+    async create(@Body() entity: T): Promise<T> {
+        return await this.service.save(entity);
     }
 
     @Put(':id')

@@ -1,9 +1,14 @@
-import { Controller, Get, UseGuards, Param, HttpException, HttpStatus, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, HttpException, HttpStatus, Post, Body, UseGuards } from '@nestjs/common';
 import { GenericController } from 'src/generic.controller';
 import { User } from 'src/entities/user.entity';
 import { UserService } from 'src/services/user.service';
 import { JwtAuthGuard } from 'src/auth-strategies/jwt-strategy.guard';
+import { UserRole } from 'src/enums/user-role.enum';
+import { Roles } from 'src/role/role.decorator';
+import { RolesGuard } from 'src/role/role.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @Controller('users')
 export class UserController extends GenericController<User> {
     
@@ -14,17 +19,25 @@ export class UserController extends GenericController<User> {
     }
 
     @Get()
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
     async findAll(): Promise<User[]> {
         throw new HttpException('METHOD NOT ALLOWED', HttpStatus.METHOD_NOT_ALLOWED)
     }
 
     @Get(':id')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
     async findOne(@Param('id') id: number): Promise<User> {
         throw new HttpException('METHOD NOT ALLOWED', HttpStatus.METHOD_NOT_ALLOWED)
     }
 
     @Post()
-    async create(@Body() user: User): Promise<void> {
-        this.uService.create(user);
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
+    async create(@Body() user: User): Promise<User> {
+        const newUser = await this.uService.create(user);
+        newUser.password = null;
+        return newUser;
     }
 }

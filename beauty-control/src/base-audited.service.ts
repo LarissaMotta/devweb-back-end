@@ -10,14 +10,14 @@ export class BaseAuditedService<T extends BaseAudited> extends GenericService<T>
         super(repository)
     }
 
-    async create(entity: T, user: User) {
+    async create(entity: T, user: User): Promise<T> {
         entity.createdBy = user.email;
-        await super.save(entity);
+        return await super.save(entity);
     }
 
-    async update(entity: T, user: User) {
+    async update(entity: T, user: User): Promise<T> {
         entity.updatedBy = user.email;
-        await super.save(entity);
+        return await super.save(entity);
     }
 
     async softDelete(id: number, user: User): Promise<void> {

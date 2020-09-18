@@ -1,4 +1,3 @@
-import { AuthStrategiesModule } from './auth-strategies/auth-strategies.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ControllersModule } from './controllers/controllers.module';
@@ -7,6 +6,8 @@ import { ProductSupplier } from './entities/product-supplier.entity';
 import { Supplier } from './entities/supplier.entity';
 import { User } from './entities/user.entity';
 import { UserSupplierRating } from './entities/user-supplier-rating.entity';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './role/role.guard';
 
 @Module({
   imports: [
@@ -27,6 +28,6 @@ import { UserSupplierRating } from './entities/user-supplier-rating.entity';
       ],
       synchronize: true,
     }),
-  ],
+  ]
 })
 export class AppModule {}
