@@ -3,8 +3,9 @@ import { Supplier } from 'src/entities/supplier.entity';
 import { SupplierService } from 'src/services/supplier.service';
 import { BaseAuditedController } from 'src/base-audited.controller';
 import { JwtAuthGuard } from 'src/auth-strategies/jwt-strategy.guard';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('suppliers')
 @ApiBearerAuth()
 @Controller('suppliers')
 export class SupplierController extends BaseAuditedController<Supplier> {

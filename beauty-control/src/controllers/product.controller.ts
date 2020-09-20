@@ -8,7 +8,7 @@ import { BaseAuditedController } from 'src/base-audited.controller';
 import { UserRole } from 'src/enums/user-role.enum';
 import { Roles } from 'src/role/role.decorator';
 import { RolesGuard } from 'src/role/role.guard';
-import { ApiBearerAuth, ApiBody, ApiConsumes } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 const fs = require('fs')
 
@@ -32,6 +32,7 @@ const imageFileFilter = (req, file, callback) => {
   callback(null, true);
 };
 
+@ApiTags('products')
 @ApiBearerAuth()
 @Controller('products')
 export class ProductController extends BaseAuditedController<Product> {
@@ -75,12 +76,10 @@ export class ProductController extends BaseAuditedController<Product> {
     }
 
     @Put(':id')
-    
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(UserRole.ADMIN)
     @UseInterceptors(FileInterceptor('img', { storage, fileFilter: imageFileFilter }))
-    @ApiConsumes('multipart/form-data')
-    @ApiBody({ type: Product })
+    @ApiResponse({ type: Product })
     async updateWithImg(@UploadedFile() img, @Param('id') id: number, @Body() product: Product, @Req() req): Promise<Product> {
         product.id = +product.id;
         product = {...product} as Product

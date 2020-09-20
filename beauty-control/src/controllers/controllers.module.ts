@@ -6,6 +6,7 @@ import { UserController } from './user.controller';
 import { AuthController } from './auth.controller';
 import { SupplierController } from './supplier.controller';
 import { ProductSupplierController } from './product-supplier.controller';
+import { UserSupplierRantigController } from './user-supplier-rating.controller';
 
 @Module({
     imports: [
@@ -17,7 +18,8 @@ import { ProductSupplierController } from './product-supplier.controller';
         UserController,
         AuthController,
         SupplierController,
-        ProductSupplierController
+        ProductSupplierController,
+        UserSupplierRantigController
     ],
 })
 export class ControllersModule {}

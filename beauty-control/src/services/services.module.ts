@@ -11,6 +11,7 @@ import { JwtService, JwtModule } from '@nestjs/jwt';
 import { UserSupplierRating } from 'src/entities/user-supplier-rating.entity';
 import { SupplierService } from './supplier.service';
 import { ProductSupplierService } from './product-supplier.service';
+import { UserSupplierRatingService } from './user-supplier-rating.service';
 
 @Module({
     imports: [
@@ -30,14 +31,16 @@ import { ProductSupplierService } from './product-supplier.service';
         UserService,
         AuthService,
         SupplierService,
-        ProductSupplierService
+        ProductSupplierService,
+        UserSupplierRatingService
     ],
     exports: [
         ProductService,
         UserService,
         AuthService,
         SupplierService,
-        ProductSupplierService
+        ProductSupplierService,
+        UserSupplierRatingService
     ]
 })
 export class ServicesModule {}

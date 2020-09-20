@@ -6,8 +6,9 @@ import { JwtAuthGuard } from 'src/auth-strategies/jwt-strategy.guard';
 import { UserRole } from 'src/enums/user-role.enum';
 import { Roles } from 'src/role/role.decorator';
 import { RolesGuard } from 'src/role/role.guard';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('users')
 @ApiBearerAuth()
 @Controller('users')
 export class UserController extends GenericController<User> {
