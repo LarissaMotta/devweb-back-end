@@ -14,11 +14,11 @@ import { RolesGuard } from './role/role.guard';
     ControllersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'devweb',
-      database: 'beauty_control',
+      host: process.env.HOST || 'localhost',
+      port: parseInt(process.env.PORT) || 5432,
+      username: process.env.USERNAME ||'postgres',
+      password: process.env.PASS || 'devweb',
+      database: process.env.DATABASE || 'beauty_control',
       logging: true,
       entities: [
         Product,
