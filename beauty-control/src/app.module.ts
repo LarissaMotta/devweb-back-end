@@ -15,7 +15,7 @@ import { RolesGuard } from './role/role.guard';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.HOST || 'localhost',
-      port: parseInt(process.env.PORT) || 5432,
+      port: parseInt(process.env.DATABASE_PORT) || 5432,
       username: process.env.USERNAME ||'postgres',
       password: process.env.PASS || 'devweb',
       database: process.env.DATABASE || 'beauty_control',
