@@ -1,0 +1,1 @@
+web: cd beauty-control && npm start

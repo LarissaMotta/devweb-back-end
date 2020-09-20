@@ -6,8 +6,6 @@ import { ProductSupplier } from './entities/product-supplier.entity';
 import { Supplier } from './entities/supplier.entity';
 import { User } from './entities/user.entity';
 import { UserSupplierRating } from './entities/user-supplier-rating.entity';
-import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from './role/role.guard';
 
 @Module({
   imports: [

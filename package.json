@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "heroku-prebuild": "cd beauty-control && npm install",
+    "start": "cd beauty-control && npm start"
+  }
+}
