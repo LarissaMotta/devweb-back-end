@@ -1,11 +1,11 @@
 import { Controller, Request, Post, UseGuards, Get } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth-strategies/jwt-strategy.guard';
 import { LocalStrategyGuard } from 'src/auth-strategies/local-strategy.guard';
 import { User } from 'src/entities/user.entity';
 import { AuthService } from '../services/auth.service';
 
-@ApiTags('user-supplier-ratings')
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
 
@@ -18,6 +18,7 @@ export class AuthController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @Get()
     getCurrentUser(@Request() req): User {
         const user = req.user;

@@ -1,21 +1,28 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, Index } from "typeorm";
 import { Supplier } from "./supplier.entity";
 import { User } from "./user.entity";
-import { IsNumber } from "class-validator";
+import { IsNumber, Max, Min } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()
+@Index("unique", ["user", "supplier"], { unique: true }) 
 export class UserSupplierRating {
     @PrimaryGeneratedColumn()
+    @ApiProperty()
     id: number;
 
     @Column()
     @IsNumber()
+    @Min(0)
+    @Max(5)
+    @ApiProperty()
     rating: number;
 
-    @ManyToOne(type => User, u => u.userSupplierRating)
+    @ApiProperty({ type: Number })
+    @ManyToOne(type => User, u => u.userSupplierRating, { onDelete: 'CASCADE' })
     user: User;
 
-    @ManyToOne(type => Supplier, s => s.userSupplierRating)
+    @ManyToOne(type => Supplier, s => s.userSupplierRating, { onDelete: 'CASCADE' })
     supplier: Supplier;
     
 }

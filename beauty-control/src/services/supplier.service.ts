@@ -12,4 +12,8 @@ export class SupplierService extends BaseAuditedService<Supplier> {
     ) {
         super(sRepository)
     }
+
+    async getBestsSuppliers() {
+        return await this.sRepository.find({ relations: ['userSupplierRating'] })
+    }
 }

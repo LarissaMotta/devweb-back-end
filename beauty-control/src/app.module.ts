@@ -19,6 +19,7 @@ import { RolesGuard } from './role/role.guard';
       username: 'postgres',
       password: 'devweb',
       database: 'beauty_control',
+      logging: true,
       entities: [
         Product,
         ProductSupplier,
