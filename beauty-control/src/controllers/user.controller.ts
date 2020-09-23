@@ -1,4 +1,4 @@
-import { Controller, Get, Param, HttpException, HttpStatus, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, UseGuards, Delete } from '@nestjs/common';
 import { GenericController } from 'src/generic.controller';
 import { User } from 'src/entities/user.entity';
 import { UserService } from 'src/services/user.service';
@@ -23,14 +23,19 @@ export class UserController extends GenericController<User> {
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(UserRole.ADMIN)
     async findAll(): Promise<User[]> {
-        throw new HttpException('METHOD NOT ALLOWED', HttpStatus.METHOD_NOT_ALLOWED)
+        let users = await super.findAll();
+        users.forEach(x => x.password = undefined);
+        users = users.filter(x => x.role !== UserRole.ADMIN);
+        return users;
     }
 
     @Get(':id')
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(UserRole.ADMIN)
     async findOne(@Param('id') id: number): Promise<User> {
-        throw new HttpException('METHOD NOT ALLOWED', HttpStatus.METHOD_NOT_ALLOWED)
+        const user = await super.findOne(id);
+        user.password = undefined;
+        return user;
     }
 
     @Post()
@@ -40,5 +45,12 @@ export class UserController extends GenericController<User> {
         const newUser = await this.uService.create(user);
         newUser.password = null;
         return newUser;
+    }
+
+    @Delete(':id')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
+    async delete(@Param('id') id: number): Promise<void> {
+        await super.delete(id);
     }
 }
