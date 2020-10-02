@@ -15,10 +15,8 @@ export class UserService extends GenericService<User> {
         super(uRepository)
     }
 
-    //TODO Criptografar a senha antes de salvar
     async create(user: User): Promise<User> {
         const hash = await bcrypt.hash(user.password, 10);
-        user.role = UserRole.EMPLOYEE;
         user.password = hash;
         return await super.save(user);
     }

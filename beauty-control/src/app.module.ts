@@ -14,7 +14,7 @@ import { UserSupplierRating } from './entities/user-supplier-rating.entity';
       type: 'postgres',
       host: process.env.HOST || 'localhost',
       port: parseInt(process.env.DATABASE_PORT) || 5432,
-      username: process.env.USERNAME ||'postgres',
+      username: 'postgres',
       password: process.env.PASS || 'devweb',
       database: process.env.DATABASE || 'beauty_control',
       logging: true,

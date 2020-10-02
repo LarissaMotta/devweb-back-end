@@ -1,4 +1,4 @@
-import { Controller, Post, UseInterceptors, UseGuards, Body, Get, Param, Res, UploadedFile, Put, Delete, Req, HttpException, HttpStatus, Query } from '@nestjs/common';
+import { Controller, Post, UseInterceptors, UseGuards, Body, Get, Param, Res, UploadedFile, Put, Delete, Req, HttpException, HttpStatus } from '@nestjs/common';
 import { Product } from 'src/entities/product.entity';
 import { ProductService } from 'src/services/product.service';
 import { JwtAuthGuard } from 'src/auth-strategies/jwt-strategy.guard';
@@ -58,13 +58,6 @@ export class ProductController extends BaseAuditedController<Product> {
         fs.unlinkSync("./productImgs/" + product.img);
         product.img = null;
         await this.pService.save(product);
-    }
-
-    @Get()
-    @UseGuards(JwtAuthGuard)
-    async findAllPaginated(@Query('page') page: number, @Query('name') name: string): Promise<any> {
-        const products = await this.pService.findAllPaginated(page || 1, name || '');
-        return { products: products[0], totalPages: Math.ceil(products[1]/24) }
     }
 
     @Post()

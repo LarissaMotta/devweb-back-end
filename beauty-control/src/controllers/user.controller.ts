@@ -25,7 +25,6 @@ export class UserController extends GenericController<User> {
     async findAll(): Promise<User[]> {
         let users = await super.findAll();
         users.forEach(x => x.password = undefined);
-        users = users.filter(x => x.role !== UserRole.ADMIN);
         return users;
     }
 
@@ -43,7 +42,7 @@ export class UserController extends GenericController<User> {
     @Roles(UserRole.ADMIN)
     async create(@Body() user: User): Promise<User> {
         const newUser = await this.uService.create(user);
-        newUser.password = null;
+        newUser.password = undefined;
         return newUser;
     }
 

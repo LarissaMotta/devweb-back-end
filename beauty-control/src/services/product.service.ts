@@ -13,14 +13,6 @@ export class ProductService extends BaseAuditedService<Product> {
         super(pRepository);
     }
 
-    async findAllPaginated(page: number, name: string): Promise<[Product[], number]> {
-        return await this.pRepository.findAndCount({ 
-            where: `"name" ILIKE '${name}%'`,
-            skip: page,
-            take: 24 
-        })
-    }
-
     async getMoreUsedProducts(): Promise<{ name: string, id: number, orders: number }[]>{
         const response =  await this.pRepository
             .createQueryBuilder('p')
