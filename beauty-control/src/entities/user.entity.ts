@@ -22,7 +22,6 @@ export class User {
 
     @Column('varchar', { length: 100 })
     @Length(6, 40)
-    @Exclude()
     password: string;
     
     @Column({type: 'enum', enum: UserRole })
