@@ -8,7 +8,7 @@ export class IndexController {
     @Get()
     index(@Request() req): any {
         return {
-            api: 'ok',
+            api: 'ok :)',
             status: 200
         }
     }
