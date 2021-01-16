@@ -8,6 +8,7 @@ import { SupplierController } from './supplier.controller';
 import { ProductSupplierController } from './product-supplier.controller';
 import { UserSupplierRantigController } from './user-supplier-rating.controller';
 import { ReportController } from './report.controller';
+import {IndexController} from './index.controller';
 
 @Module({
     imports: [
@@ -15,6 +16,7 @@ import { ReportController } from './report.controller';
         AuthStrategiesModule
     ],
     controllers: [
+        IndexController,
         ProductController,
         UserController,
         AuthController,
