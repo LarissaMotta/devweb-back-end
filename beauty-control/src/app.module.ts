@@ -31,7 +31,7 @@ import { ProductStockLog } from './entities/product-stock-log';
       extra: {
         ssl: true,
       },
-      url: process.env.DATABASE_URL
+      url: process.env.DATABASE_URL_ELEPHANT_SQL
     }),
   ]
 })
