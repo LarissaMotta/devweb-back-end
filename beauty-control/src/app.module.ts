@@ -13,11 +13,11 @@ import { ProductStockLog } from './entities/product-stock-log';
     ControllersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.HOST || 'localhost',
-      port: parseInt(process.env.DATABASE_PORT) || 5432,
-      username: process.env.USERNAME || 'postgres',
-      password: process.env.PASS || 'devweb',
-      database: process.env.DATABASE || 'beauty_control',
+      // host: process.env.HOST || 'localhost',
+      // port: parseInt(process.env.DATABASE_PORT) || 5432,
+      // username: process.env.USERNAME || 'postgres',
+      // password: process.env.PASS || 'devweb',
+      // database: process.env.DATABASE || 'beauty_control',
       logging: true,
       entities: [
         Product,
@@ -28,6 +28,10 @@ import { ProductStockLog } from './entities/product-stock-log';
         ProductStockLog
       ],
       synchronize: true,
+      extra: {
+        ssl: true,
+      },
+      url: process.env.DATABASE_URL
     }),
   ]
 })
