@@ -3,7 +3,6 @@ import { User } from 'src/entities/user.entity';
 import { GenericService } from 'src/generic.service';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserRole } from 'src/enums/user-role.enum';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()

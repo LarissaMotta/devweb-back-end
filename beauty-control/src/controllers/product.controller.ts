@@ -74,7 +74,7 @@ export class ProductController extends BaseAuditedController<Product> {
     @UseInterceptors(FileInterceptor('img', { storage, fileFilter: imageFileFilter }))
     @ApiResponse({ type: Product })
     async updateWithImg(@UploadedFile() img, @Param('id') id: number, @Body() product: Product, @Req() req): Promise<Product> {
-        product.id = +product.id;
+        product.id = +product.id; // converte para inteiro
         product = {...product} as Product
 
         if (img) { product.img = img.filename }

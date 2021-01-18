@@ -3,7 +3,8 @@ import { UserRole } from "src/enums/user-role.enum";
 import { UserSupplierRating } from "./user-supplier-rating.entity";
 import { Length, IsEmail, IsEnum } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
-import { Exclude } from "class-transformer";
+import { ProductStockLog } from "./product-stock-log";
+import { ProductSupplier } from "./product-supplier.entity";
 
 @Entity()
 export class User {
@@ -29,7 +30,16 @@ export class User {
     @IsEnum(UserRole)
     role: UserRole
 
+    @Column()
+    @ApiProperty()
+    active: boolean;
+
     @OneToMany(type => UserSupplierRating, usr => usr.user)
     userSupplierRating: UserSupplierRating[];
 
+    @OneToMany(type => ProductStockLog, usr => usr.user)
+    productStockLogs: ProductStockLog[];
+
+    @OneToMany(type => ProductSupplier, usr => usr.user)
+    productSuppliers: ProductSupplier[];
 }

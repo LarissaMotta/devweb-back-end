@@ -11,14 +11,14 @@ export abstract class BaseAudited {
     @DeleteDateColumn()
     deletedIn: Date;
 
-    @Column({ nullable: true })
-    createdBy: string;
+    @Column('int', { nullable: true })
+    createdBy: number;
 
-    @Column({ nullable: true })
-    updatedBy: string;
+    @Column('int', { nullable: true })
+    updatedBy: number;
 
-    @Column({ nullable: true })
-    deletedBy: string;
+    @Column('int', { nullable: true })
+    deletedBy: number;
 
     @Column('int', { default: 0 })
     version: number

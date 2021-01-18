@@ -32,6 +32,6 @@ export class ProductService extends BaseAuditedService<Product> {
     }
 
     async getStockFlow(): Promise<Product[]> {
-        return await this.pRepository.find({ relations: ['productSuppliers'] });
+        return await this.pRepository.find({ relations: ['productStockLogs'] });
     }
 }

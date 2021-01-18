@@ -5,7 +5,7 @@ import { AuthStrategiesModule } from 'src/auth-strategies/auth-strategies.module
 import { UserController } from './user.controller';
 import { AuthController } from './auth.controller';
 import { SupplierController } from './supplier.controller';
-import { ProductSupplierController } from './product-supplier.controller';
+import { ProductStockLogController } from './product-stock-log.controller';
 import { UserSupplierRantigController } from './user-supplier-rating.controller';
 import { ReportController } from './report.controller';
 
@@ -19,7 +19,7 @@ import { ReportController } from './report.controller';
         UserController,
         AuthController,
         SupplierController,
-        ProductSupplierController,
+        ProductStockLogController,
         UserSupplierRantigController,
         ReportController
     ],

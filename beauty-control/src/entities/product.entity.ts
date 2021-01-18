@@ -4,6 +4,9 @@ import { Category } from 'src/enums/category.enum';
 import { ProductSupplier } from './product-supplier.entity';
 import { IsEnum, IsNumber, IsOptional, Length } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { ProductStockLog } from './product-stock-log';
+import { StatusProduct } from 'src/enums/status-product.enum';
+import { StatusStock } from 'src/enums/status-stcok.enum';
 
 @Entity()
 export class Product extends BaseAudited {
@@ -31,17 +34,32 @@ export class Product extends BaseAudited {
     @OneToMany(type => ProductSupplier, ps => ps.product)
     productSuppliers: Promise<ProductSupplier[]>;
 
+    @OneToMany(type => ProductStockLog, ps => ps.product)
+    productStockLogs: Promise<ProductStockLog[]>;
+
     @RelationId('productSuppliers')
     productSuppliersIds: number[];
+
+    @RelationId('productStockLogs')
+    productStockLogsIds: number[];
 
     @Column('varchar', { nullable: true, length: 70 })
     img: string;
 
-    quantity: number
+    @Column('int', { default: 0 })
+    @ApiProperty()
+    runnigOutOfStock: number;
+
+    @Column({type: 'enum', enum: StatusProduct })
+    @IsEnum(StatusProduct)
+    @ApiProperty({ enum: StatusProduct })
+    status: StatusProduct
+
+    quantity: number;
 
     @AfterLoad()
     async getQuantity(){
-        this.quantity =  (await this.productSuppliers).map(ps => ps.quantity).reduce((p, c) => p + c, 0);
+        this.quantity =  (await this.productStockLogs).map(ps => ps.status === StatusStock.INPUT ? ps.quantity : - ps.quantity).reduce((p, c) => p + c, 0);
     }
     
 }

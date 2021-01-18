@@ -7,11 +7,12 @@ import { User } from 'src/entities/user.entity';
 import { UserService } from './user.service';
 import { Supplier } from 'src/entities/supplier.entity';
 import { AuthService } from './auth.service';
-import { JwtService, JwtModule } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { UserSupplierRating } from 'src/entities/user-supplier-rating.entity';
 import { SupplierService } from './supplier.service';
-import { ProductSupplierService } from './product-supplier.service';
 import { UserSupplierRatingService } from './user-supplier-rating.service';
+import { ProductStockLogService } from './product-stock-log.service';
+import { ProductStockLog } from 'src/entities/product-stock-log';
 
 @Module({
     imports: [
@@ -20,7 +21,8 @@ import { UserSupplierRatingService } from './user-supplier-rating.service';
             ProductSupplier,
             Supplier,
             User,
-            UserSupplierRating
+            UserSupplierRating,
+            ProductStockLog
         ]),
         JwtModule.register({
             secret: 'DevWeb'
@@ -31,7 +33,7 @@ import { UserSupplierRatingService } from './user-supplier-rating.service';
         UserService,
         AuthService,
         SupplierService,
-        ProductSupplierService,
+        ProductStockLogService,
         UserSupplierRatingService
     ],
     exports: [
@@ -39,8 +41,8 @@ import { UserSupplierRatingService } from './user-supplier-rating.service';
         UserService,
         AuthService,
         SupplierService,
-        ProductSupplierService,
-        UserSupplierRatingService
+        UserSupplierRatingService,
+        ProductStockLogService
     ]
 })
 export class ServicesModule {}

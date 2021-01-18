@@ -6,6 +6,7 @@ import { ProductSupplier } from './entities/product-supplier.entity';
 import { Supplier } from './entities/supplier.entity';
 import { User } from './entities/user.entity';
 import { UserSupplierRating } from './entities/user-supplier-rating.entity';
+import { ProductStockLog } from './entities/product-stock-log';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { UserSupplierRating } from './entities/user-supplier-rating.entity';
         ProductSupplier,
         Supplier,
         User,
-        UserSupplierRating
+        UserSupplierRating,
+        ProductStockLog
       ],
       synchronize: true,
     }),
