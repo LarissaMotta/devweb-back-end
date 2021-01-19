@@ -1,1 +1,1 @@
-web: cd beauty-control && npm start
+web: cd beauty-control && npm run start:prod

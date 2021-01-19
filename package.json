@@ -1,6 +1,7 @@
 {
   "scripts": {
     "heroku-prebuild": "cd beauty-control && npm install",
-    "start": "cd beauty-control && npm start"
+    "start": "cd beauty-control && npm  run start:prod",
+    "heroku-postbuild": "cd beauty-control && npm install --only=dev --no-shrinkwrap && npm run build"
   }
 }
