@@ -3,7 +3,7 @@
 O trabalho em questão é da disciplina de *Desenvolvimento Web*, do curso de graduação de Bacharelado de Sistema de Informação do IFES - Serra, pelo docente Mr. Felipe Frechiani de Oliveira.
 
 ### Informações Gerais
-- **Equipe**: [Harã Heique](https://github.com/HaraHeique), [Joel Will](https://github.com/joelwb), [Larissa Motta](https://github.com/LarissaMotta) e [Nicolas Sampaio](https://github.com/NicolasSampaio)
+- **Equipe**: [Antônio Carlos](https://github.com/duraes-antonio), [Harã Heique](https://github.com/HaraHeique), [Joel Will](https://github.com/joelwb) e [Nicolas Sampaio](https://github.com/NicolasSampaio)
 - **Principais Responsáveis**: [Joel Will](https://github.com/joelwb) e [Nicolas Sampaio](https://github.com/NicolasSampaio)
 - **Tecnologia**: NestJS (Versão 5.0.0+)
 - **Ambiente de desenvolvimento**: Visual Studio Code (versão 1.35.1+)
@@ -30,25 +30,10 @@ Abaixo está a imagem demonstrando o [PMC](https://robsoncamargo.com.br/blog/pro
     <img src="https://github.com/LarissaMotta/devweb-front-end/blob/master/docs/images/Project_Model_Canvas-PMC.jpg" alt="PMC-project" title="Project Model Canvas do projeto Beauty Control" />
 </figure>
 
-### 3. Requisitos do Sistema
-
-### 4. Modelagem
-
-#### 4.1 Comportamental - Casos de Uso
-
-<figure>
-    <img src="https://github.com/LarissaMotta/devweb-back-end/blob/master/docs/Diagrama%20de%20Casos%20de%20Uso.png?raw=true" alt="Casos de Uso" title="Beauty Control - Casos de Uso" />
-</figure>
-
-#### 4.2 Estrutural - Diagrama de classes do Projeto
-
-<figure>
-    <img src="https://github.com/LarissaMotta/devweb-back-end/blob/master/docs/Diagrama%20de%20Classes.png?raw=true" alt="Diagrama de Classes" title="Beauty Control - Diagrama de Classes" />
-</figure>
-
 ### Informações adicionais
 Todo o código fonte está hospedado no:
-- [Front-end](https://github.com/LarissaMotta/devweb-front-end). 
+- [Artefatos](https://github.com/HaraHeique/LES-artefatos-beauty-control);
+- [Front-end](https://github.com/LarissaMotta/devweb-front-end); 
 - [Back-end](https://github.com/LarissaMotta/devweb-back-end).
 
 
