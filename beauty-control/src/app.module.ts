@@ -26,7 +26,7 @@ import { ProductStockLog } from './entities/product-stock-log';
       extra: {
         ssl: true,
       },
-      url: process.env.DATABASE_URL_ELEPHANT_SQL || 'postgres://rcvzjvep:asMGCyWGa93NEXDHfr6p6dmkmMUndEhN@tuffi.db.elephantsql.com:5432/rcvzjvep'
+      url: process.env.DATABASE_URL_ELEPHANT_SQL
     }),
   ]
 })
