@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, HttpException, HttpStatus, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
 import { GenericController } from 'src/generic.controller';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth-strategies/jwt-strategy.guard';
@@ -22,21 +22,21 @@ export class ProductStockLogController extends GenericController<ProductStockLog
     @Post()
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(UserRole.ADMIN)
-    async create(@Body() productStockLog: ProductStockLog): Promise<ProductStockLog> {
-        return await super.create(productStockLog);
+    async createLog(@Body() productStockLog: ProductStockLog, @Req() req): Promise<ProductStockLog> {
+        return await this.pslService.create(productStockLog, req.user);
     }
 
     @Put(':id')
     @Roles(UserRole.ADMIN)
     @UseGuards(JwtAuthGuard, RolesGuard)
     async update(@Param('id') id: number, @Body() productStockLog: ProductStockLog): Promise<ProductStockLog> {
-        return await super.update(id, productStockLog)
+        throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
     }
 
     @Delete(':id')
     @Roles(UserRole.ADMIN)
     @UseGuards(JwtAuthGuard, RolesGuard)
     async delete(@Param('id') id: number): Promise<void> {
-        await super.delete(id);
+        await this.pslService.delete(id);
     }
 }

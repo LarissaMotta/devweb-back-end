@@ -31,6 +31,6 @@ export class UserSupplierRantigController extends GenericController<UserSupplier
     @Delete(':id')
     @UseGuards(JwtAuthGuard)
     async delete(@Param('id') id: number): Promise<void> {
-        await super.delete(id);
+        throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
     }
 }

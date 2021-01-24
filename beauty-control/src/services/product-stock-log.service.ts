@@ -6,6 +6,7 @@ import { ProductStockLog } from 'src/entities/product-stock-log';
 import { StatusStock } from 'src/enums/status-stcok.enum';
 import { ProductSupplier } from 'src/entities/product-supplier.entity';
 import { User } from 'src/entities/user.entity';
+import { ProductService } from './product.service';
 
 @Injectable()
 export class ProductStockLogService extends GenericService<ProductStockLog> {
@@ -13,7 +14,8 @@ export class ProductStockLogService extends GenericService<ProductStockLog> {
         @InjectRepository(ProductStockLog)
         private pslRepository: Repository<ProductStockLog>,
         @InjectRepository(ProductSupplier)
-        private psService: Repository<ProductSupplier>
+        private psRepository: Repository<ProductSupplier>,
+        private pService: ProductService
     ) {
         super(pslRepository)
     }
@@ -21,20 +23,37 @@ export class ProductStockLogService extends GenericService<ProductStockLog> {
     async create(productStockLog: ProductStockLog, user: User): Promise<ProductStockLog> {
         if (productStockLog.status === StatusStock.OUTPUT) {
             productStockLog.supplier = undefined;
-        }
+        } else{
+            let productSupplier = await this.psRepository.findOne({product: productStockLog.product, supplier: productStockLog.supplier });
 
-        let productSupplier = await this.psService.findOne({product: productStockLog.product, supplier: productStockLog.supplier });
+            // Se não tiver relacionamento, cria um
+            if (!productSupplier) {
+                productSupplier = new ProductSupplier();
+                productSupplier.product = productStockLog.product;
+                productSupplier.supplier = productStockLog.supplier;
+                productSupplier.user = user;
+                productSupplier.date = productStockLog.date;
 
-        if (!productSupplier) {
-            productSupplier = new ProductSupplier();
-            productSupplier.product = productStockLog.product;
-            productSupplier.supplier = productStockLog.supplier;
-            productSupplier.user = user;
-
-            this.psService.save(productSupplier);
+                await this.psRepository.save(productSupplier);
+            }
         }
         
+        // Salva o log
         productStockLog.user = user;
-        return await this.psService.save(productStockLog);
+        productStockLog = await this.pslRepository.save(productStockLog);
+        
+        await this.pService.atualizaStatus(productStockLog.product);
+
+        productStockLog.user = undefined;
+        return productStockLog; 
     }
+
+    async delete(id: number) {
+        const productStockLog = await this.pslRepository.findOne(id, { relations: ['product'] });
+        await super.delete(id);
+
+        await this.pService.atualizaStatus(productStockLog.product.id);
+    }
+
+    private
 }

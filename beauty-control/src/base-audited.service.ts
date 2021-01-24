@@ -16,7 +16,9 @@ export class BaseAuditedService<T extends BaseAudited> extends GenericService<T>
     }
 
     async update(entity: T, user: User): Promise<T> {
+        const entityBD = await this.findOne((entity as any).id);
         entity.updatedBy = user.id;
+        entity.version = entityBD.version;
         return await super.save(entity);
     }
 

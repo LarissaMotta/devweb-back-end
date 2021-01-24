@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body, UseGuards, Delete } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, UseGuards, Delete, Req } from '@nestjs/common';
 import { GenericController } from 'src/generic.controller';
 import { User } from 'src/entities/user.entity';
 import { UserService } from 'src/services/user.service';
@@ -22,9 +22,10 @@ export class UserController extends GenericController<User> {
     @Get()
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(UserRole.ADMIN)
-    async findAll(): Promise<User[]> {
+    async findAllButNotCurrentUser(@Req() req): Promise<User[]> {
         let users = await super.findAll();
         users.forEach(x => x.password = undefined);
+        users = users.filter(x => x.id != req.user.id);
         return users;
     }
 
