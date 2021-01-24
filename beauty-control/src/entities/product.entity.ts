@@ -50,10 +50,11 @@ export class Product extends BaseAudited {
     @ApiProperty()
     runnigOutOfStock: number;
 
-    @Column({type: 'enum', enum: StatusProduct })
+    @Column({type: 'enum', enum: StatusProduct, default: StatusProduct.OUT_OF_STOCK })
     @IsEnum(StatusProduct)
     @ApiProperty({ enum: StatusProduct })
-    status: StatusProduct
+    @IsOptional()
+    status: StatusProduct;
 
     quantity: number;
 
