@@ -5,6 +5,7 @@ import { Product } from 'src/entities/product.entity';
 import { BaseAuditedService } from 'src/base-audited.service';
 import { StatusProduct } from 'src/enums/status-product.enum';
 import { StatusStock } from 'src/enums/status-stcok.enum';
+import { ProductStockLog } from 'src/entities/product-stock-log';
 
 @Injectable()
 export class ProductService extends BaseAuditedService<Product> {
@@ -37,8 +38,9 @@ export class ProductService extends BaseAuditedService<Product> {
         return await this.pRepository.find({ relations: ['productStockLogs'] });
     }
 
-    async atualizaStatus(product){
+    async atualizaStatus(product, productStockLog: ProductStockLog, criando: boolean) {
         product = await this.pRepository.findOne(product);
+        product.quantity += (productStockLog.status == StatusStock.INPUT && criando) || (productStockLog.status == StatusStock.OUTPUT && !criando) ? productStockLog.quantity : - productStockLog.quantity;
 
         if (product.quantity > product.runnigOutOfStock) product.status = StatusProduct.IN_STOCK;
         else if (product.quantity < product.runnigOutOfStock && product.quantity > 0) product.status = StatusProduct.RUNNIG_OUT_OF_STOCK;

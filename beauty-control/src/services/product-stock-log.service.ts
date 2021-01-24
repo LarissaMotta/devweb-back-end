@@ -42,7 +42,7 @@ export class ProductStockLogService extends GenericService<ProductStockLog> {
         productStockLog.user = user;
         productStockLog = await this.pslRepository.save(productStockLog);
         
-        await this.pService.atualizaStatus(productStockLog.product);
+        await this.pService.atualizaStatus(productStockLog.product, productStockLog, true);
 
         productStockLog.user = undefined;
         return productStockLog; 
@@ -52,7 +52,7 @@ export class ProductStockLogService extends GenericService<ProductStockLog> {
         const productStockLog = await this.pslRepository.findOne(id, { relations: ['product'] });
         await super.delete(id);
 
-        await this.pService.atualizaStatus(productStockLog.product.id);
+        await this.pService.atualizaStatus(productStockLog.product.id, productStockLog, false);
     }
 
     private

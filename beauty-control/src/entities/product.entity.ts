@@ -56,11 +56,7 @@ export class Product extends BaseAudited {
     @IsOptional()
     status: StatusProduct;
 
+    @Column('int', { default: 0 })
+    @IsOptional()
     quantity: number;
-
-    @AfterLoad()
-    async getQuantity(){
-        this.quantity =  (await this.productStockLogs).map(ps => ps.status === StatusStock.INPUT ? ps.quantity : - ps.quantity).reduce((p, c) => p + c, 0);
-    }
-    
 }
