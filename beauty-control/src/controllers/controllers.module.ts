@@ -6,7 +6,6 @@ import { UserController } from './user.controller';
 import { AuthController } from './auth.controller';
 import { SupplierController } from './supplier.controller';
 import { ProductStockLogController } from './product-stock-log.controller';
-import { UserSupplierRantigController } from './user-supplier-rating.controller';
 import { ReportController } from './report.controller';
 import {IndexController} from './index.controller';
 
@@ -22,7 +21,6 @@ import {IndexController} from './index.controller';
         AuthController,
         SupplierController,
         ProductStockLogController,
-        UserSupplierRantigController,
         ReportController
     ],
 })

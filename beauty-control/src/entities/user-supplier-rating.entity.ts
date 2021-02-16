@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, Index } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, Index, RelationId } from "typeorm";
 import { Supplier } from "./supplier.entity";
 import { User } from "./user.entity";
 import { IsNumber, Max, Min } from "class-validator";
@@ -21,6 +21,10 @@ export class UserSupplierRating {
     @ApiProperty({ type: Number })
     @ManyToOne(type => User, u => u.userSupplierRating, { onDelete: 'CASCADE' })
     user: User;
+
+    @RelationId('user')
+    userId: number;
+    
 
     @ManyToOne(type => Supplier, s => s.userSupplierRating, { onDelete: 'CASCADE' })
     supplier: Supplier;

@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body, UseGuards, Delete, Req } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, UseGuards, Delete, Req, Put } from '@nestjs/common';
 import { GenericController } from 'src/generic.controller';
 import { User } from 'src/entities/user.entity';
 import { UserService } from 'src/services/user.service';
@@ -45,6 +45,28 @@ export class UserController extends GenericController<User> {
         const newUser = await this.uService.create(user);
         newUser.password = undefined;
         return newUser;
+    }
+
+    @Post(':id/active')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
+    async activateDeactivate(@Param('id') id: number, @Body() data: { active: boolean }): Promise<User> {
+        let user = new User();
+        user.id = id;
+        user.active = data.active;
+        user = await super.update(id, user);
+        user.password = undefined;
+        return user;
+    }
+
+    @Put(':id')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
+    async update(@Param('id') id: number, @Body() user: User): Promise<User> {
+        user.password = undefined;
+        user = await super.update(id, user);
+        user.password = undefined;
+        return user;
     }
 
     @Delete(':id')

@@ -31,17 +31,10 @@ export class Supplier extends BaseAudited {
     productSuppliers: ProductSupplier[];
 
     @OneToMany(type => UserSupplierRating, usr => usr.supplier)
-    userSupplierRating: Promise<UserSupplierRating[]>;
+    userSupplierRating: UserSupplierRating[];
 
-    rating: number
+    @ApiProperty()
+    avgRating: number
 
-    @AfterLoad()
-    async getRating(){
-        const us = (await this.userSupplierRating);
-        const soma = us.map(us => us.rating).reduce((p, c) => p + c, 0);
-
-        if (us.length === 0) { this.rating = 0 }
-        else { this.rating = soma / us.length; };
-    }
-
+    userRating: number;
 }
