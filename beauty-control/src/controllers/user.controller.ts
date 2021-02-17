@@ -47,7 +47,7 @@ export class UserController extends GenericController<User> {
         return newUser;
     }
 
-    @Post(':id/active')
+    @Put(':id/active')
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(UserRole.ADMIN)
     async activateDeactivate(@Param('id') id: number, @Body() data: { active: boolean }): Promise<User> {
