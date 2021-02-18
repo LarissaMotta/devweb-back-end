@@ -23,11 +23,7 @@ export class SupplierService extends BaseAuditedService<Supplier> {
         const suppliers = await this.sRepository.find({ relations: ['userSupplierRating'], });
         suppliers.forEach(supplier => {
             const us = supplier.userSupplierRating;
-            const soma = us.map(us => us.rating).reduce((a, b) => a + b, 0);
-
-            if (us.length === 0) { supplier.avgRating = 0 }
-            else { supplier.avgRating = soma / us.length; };
-
+            supplier.avgRating = this.usrService.calcAvg(us);
 
             const userRating = us.find(x => x.userId == this.authService.currentUser.id);
             supplier.userRating = userRating ? userRating.rating : 0;
@@ -40,17 +36,20 @@ export class SupplierService extends BaseAuditedService<Supplier> {
         supplier = await super.save(supplier);
 
         const userSupplierRating = new UserSupplierRating();
-        userSupplierRating.rating = supplier.avgRating;
+        userSupplierRating.rating = supplier.userRating;
         userSupplierRating.user = user;
-        this.usrService.save(userSupplierRating);
+        userSupplierRating.supplier = supplier;
+        await this.usrService.save(userSupplierRating);
 
+        supplier.avgRating = userSupplierRating.rating;
         return supplier;
     }
 
     async update(supplier: Supplier, user: User): Promise<Supplier> {
         supplier = await super.update(supplier, user);
 
-        this.usrService.updateBasedOnSupplierAndUser(supplier.id, user.id, supplier.avgRating);
+        await this.usrService.updateBasedOnSupplierAndUser(supplier.id, user.id, supplier.userRating);
+        supplier.avgRating = await this.usrService.calcAvgBasedOnSupplier(supplier.id);
         return supplier;
     }
 

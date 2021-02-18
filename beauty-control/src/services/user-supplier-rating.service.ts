@@ -34,4 +34,16 @@ export class UserSupplierRatingService extends GenericService<UserSupplierRating
         userSupplierRating.rating = rating;
         await this.usrRepository.save(userSupplierRating);
     }
+
+    async calcAvgBasedOnSupplier(supplierId: number): Promise<number> {
+        const userSupplierRating = await this.usrRepository.find({ supplier: { id: supplierId } });
+        return this.calcAvg(userSupplierRating);
+    }
+
+    calcAvg(us: UserSupplierRating[]): number {
+        if (us.length === 0) { return 0 }
+
+        const soma = us.map(us => us.rating).reduce((a, b) => a + b, 0) ;
+        return soma / us.length;
+    }
 }
