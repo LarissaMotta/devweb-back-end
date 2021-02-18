@@ -1,6 +1,6 @@
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService } from 'src/services/user.service';
 import { AuthService } from 'src/services/auth.service';
 import { ContextIdFactory, ModuleRef } from '@nestjs/core';
@@ -18,6 +18,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(request: Request, payload: any) {
     const user = await this.userService.findOne(payload.id);
+    
+    if (!user.active) {
+      throw new UnauthorizedException();
+    }
+
     const contextId = ContextIdFactory.getByRequest(request);
     // "AuthService" is a request-scoped provider
     const authService = await this.moduleRef.resolve(AuthService, contextId, { strict: false });
