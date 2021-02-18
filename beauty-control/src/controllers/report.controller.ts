@@ -3,6 +3,7 @@ import { ApiTags, ApiBearerAuth } from "@nestjs/swagger";
 import { JwtAuthGuard } from "src/auth-strategies/jwt-strategy.guard";
 import { UserRole } from "src/enums/user-role.enum";
 import { Roles } from "src/role/role.decorator";
+import { RolesGuard } from "src/role/role.guard";
 import { ProductService } from "src/services/product.service";
 import { SupplierService } from "src/services/supplier.service";
 
@@ -13,7 +14,7 @@ export class ReportController {
     
     constructor(private productService: ProductService, private supplierService: SupplierService) {}
 
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Get('products')
     @Roles(UserRole.ADMIN)
     async getProductsReport() {
@@ -23,7 +24,7 @@ export class ReportController {
         return { moreUseProducts, stockFlow };
     }
 
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Get('suppliers')
     @Roles(UserRole.ADMIN)
     async getSuppliersReport() {
