@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany, CreateDateColumn } from "typeorm";
 import { UserRole } from "src/enums/user-role.enum";
 import { UserSupplierRating } from "./user-supplier-rating.entity";
 import { Length, IsEmail, IsEnum, IsOptional } from "class-validator";
@@ -47,4 +47,7 @@ export class User {
 
     @OneToMany(type => ProductSupplier, usr => usr.user)
     productSuppliers: ProductSupplier[];
+
+    @CreateDateColumn()
+    createdIn: Date;
 }

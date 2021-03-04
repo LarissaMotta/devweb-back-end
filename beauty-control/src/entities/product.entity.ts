@@ -32,10 +32,10 @@ export class Product extends BaseAudited {
     category: Category
 
     @OneToMany(type => ProductSupplier, ps => ps.product)
-    productSuppliers: Promise<ProductSupplier[]>;
+    productSuppliers: ProductSupplier[];
 
     @OneToMany(type => ProductStockLog, ps => ps.product)
-    productStockLogs: Promise<ProductStockLog[]>;
+    productStockLogs: ProductStockLog[];
 
     @RelationId('productSuppliers')
     productSuppliersIds: number[];

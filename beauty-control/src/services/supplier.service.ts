@@ -7,6 +7,7 @@ import { User } from 'src/entities/user.entity';
 import { UserSupplierRating } from 'src/entities/user-supplier-rating.entity';
 import { UserSupplierRatingService } from './user-supplier-rating.service';
 import { AuthService } from './auth.service';
+import { BestSupplier } from 'src/views-model/best-suppliers.viewmodel';
 
 @Injectable()
 export class SupplierService extends BaseAuditedService<Supplier> {
@@ -55,5 +56,17 @@ export class SupplierService extends BaseAuditedService<Supplier> {
 
     async getBestsSuppliers() {
         return await this.sRepository.find({ relations: ['userSupplierRating'] })
+    }
+
+    async getBestSuppliers(avgRating: number): Promise<BestSupplier[]> {
+        let suppliers = await this.sRepository.find({ relations: ['userSupplierRating'] });
+        suppliers.forEach(supplier => {
+            const us = supplier.userSupplierRating;
+            supplier.avgRating = this.usrService.calcAvg(us);
+        });
+
+        return suppliers
+            .filter(x => x.avgRating >= avgRating)
+            .map(x => ({ id: x.id, name: x.name, averageRating: x.avgRating }));
     }
 }
