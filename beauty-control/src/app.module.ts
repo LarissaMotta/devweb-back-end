@@ -7,9 +7,11 @@ import { Supplier } from './entities/supplier.entity';
 import { User } from './entities/user.entity';
 import { UserSupplierRating } from './entities/user-supplier-rating.entity';
 import { ProductStockLog } from './entities/product-stock-log';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     ControllersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',

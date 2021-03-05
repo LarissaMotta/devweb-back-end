@@ -20,7 +20,7 @@ async function bootstrap() {
 
     const document = SwaggerModule.createDocument(app, options);
 
-    SwaggerModule.setup('api', app, document);
+    SwaggerModule.setup('api', app, document); 
 
     const configService: ConfigService = app.get(ConfigService);
     // Set the config options
