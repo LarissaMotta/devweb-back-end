@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany, AfterLoad, RelationI
 import { BaseAudited } from 'src/models/base-audited.model';
 import { Category } from 'src/enums/category.enum';
 import { ProductSupplier } from './product-supplier.entity';
-import { IsEnum, IsNumber, IsOptional, Length } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, IsString, Length } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { ProductStockLog } from './product-stock-log';
 import { StatusProduct } from 'src/enums/status-product.enum';
@@ -12,7 +12,6 @@ import { StatusStock } from 'src/enums/status-stcok.enum';
 export class Product extends BaseAudited {
     @PrimaryGeneratedColumn()
     @ApiProperty()
-    @IsNumber()
     @IsOptional()
     id: number;
 
