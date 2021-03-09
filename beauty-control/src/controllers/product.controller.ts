@@ -94,9 +94,13 @@ export class ProductController extends BaseAuditedController<Product> {
     @UseInterceptors(FileInterceptor('img', { storage, fileFilter: imageFileFilter }))
     async createWithImg(@UploadedFile() img: Express.Multer.File,@Body() product: Product, @Req() req): Promise<Product> {
         let productBd = await super.createBaseAudited({...product, img: null } as Product, req);
-        const resp = await admin.storage().bucket().upload(img.path, { destination: 'products/' + productBd.id + '.jpg' });
-        productBd.img = 'products/' + productBd.id + '.jpg';
-        productBd = await super.updateBaseAudited(productBd.id, productBd, req);
+
+        if (img) {
+          const resp = await admin.storage().bucket().upload(img.path, { destination: 'products/' + productBd.id + '.jpg' });
+          productBd.img = 'products/' + productBd.id + '.jpg';
+          productBd = await super.updateBaseAudited(productBd.id, productBd, req);
+        }
+        
         return productBd;
     }
 
@@ -111,7 +115,10 @@ export class ProductController extends BaseAuditedController<Product> {
 
         if (img) { product.img = 'products/' + product.id + '.jpg' }
         product = await super.updateBaseAudited(id, product, req);
-        await admin.storage().bucket().upload(img.path, { destination: product.img} );
+
+        if (img) {
+          await admin.storage().bucket().upload(img.path, { destination: product.img} );
+        }
         return product;
     }
 
