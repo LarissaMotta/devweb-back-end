@@ -113,6 +113,9 @@ export class ProductController extends BaseAuditedController<Product> {
         product.id = +product.id; // converte para inteiro
         product = {...product} as Product
 
+        const productBd = await super.findOne(id);
+        product.img = productBd.img;
+
         if (img) { product.img = 'products/' + product.id + '.jpg' }
         product = await super.updateBaseAudited(id, product, req);
 
