@@ -27,6 +27,7 @@ import { ConfigModule } from '@nestjs/config';
       synchronize: true,
       extra: {
         ssl: true,
+        connectionLimit: 5
       },
       url: process.env.DATABASE_URL_ELEPHANT_SQL
     }),
